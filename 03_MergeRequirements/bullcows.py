@@ -33,10 +33,19 @@ def inform(format_string: str, bulls: int, cows: int) -> None:
 
 
 def ask(prompt: str, valid: list[str] = None) -> str:
+    cow_hint = r"""
+     \   ^~~^
+      \  ('')_______
+         ($$)        \/\
+             ||----- |
+             ||     ||
+    """
+    print(cow_hint)
     try_word = input(prompt)
     while valid and try_word not in valid:
         try_word = input(prompt)
     return try_word
+
 
 
 parser = argparse.ArgumentParser()
@@ -59,6 +68,6 @@ else:
             bufmsg = getcwd() + bufmsg.strip()
             continue
     else:
-        quit("Неверный путь к словарю слов. Попробуйте указать URL-адрес или локальный файл")
+        quit("Something wrong")
 
 print(gameplay(ask, inform, dictwords))
