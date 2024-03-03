@@ -23,3 +23,6 @@ def gameplay(ask: callable, inform: callable, words: list[str]) -> int:
         try_word = ask("Введите слово: ", words)
     if try_word.lower() == word.lower():
         return attempt
+
+def inform(format_string: str, bulls: int, cows: int) -> None:
+    print(format_string.format(bulls, cows))
