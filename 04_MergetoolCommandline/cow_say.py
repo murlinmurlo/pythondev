@@ -39,7 +39,8 @@ class CowSaid(cmd.Cmd):
     def complete_make_bubble(self, text, line, begidx, endidx):
         return complete(text, line, begidx, endidx)
 
-    def do_cowsay(self, arg):
+ 
+   def do_cowsay(self, arg):
         *opts, msg = shlex.split(arg, comments=True)
         defaultdict = {'-e': cowsay.Option.eyes, '-c': 'default', '-T': cowsay.Option.tongue}
         if opts:
@@ -69,7 +70,6 @@ class CowSaid(cmd.Cmd):
 
     def do_exit(self, arg):
         return 
-
 
 if __name__ == "__main__":
     CowSaid().cmdloop()
