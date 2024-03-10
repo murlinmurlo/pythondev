@@ -1,0 +1,84 @@
+Cowsay™ command line (2023)
+Command line where you can talk with yourself
+
+•>*** Unknown syntax: ff
+•>*** Unknown syntax: import cmd
+•>*** Unknown syntax: import shlex
+•>*** Unknown syntax: import cowsay
+•>*** Unknown syntax: import cowsay
+•>*** Unknown syntax: def complete(text, line, begin, end):
+•>*** Unknown syntax: MB_ADDER = {"-b": ["cowsay", "cowthink"],
+•>*** Unknown syntax: "-d": '',
+•>*** Unknown syntax: "-w": ["True", "False"]}
+•>*** Unknown syntax: CS_ADDER = CT_ADDER = {"-e": ["oO", "Oo", "TT", "$$", "@O", "XX", "--", "_-", "X-"],
+•>*** Unknown syntax: "-c": cowsay.list_cows(),
+•>*** Unknown syntax: "-T": ["qp",';b' , "U ", "  ", "<>", "^^", "||"]}
+•>*** Unknown syntax: ADDER = {"cowsay": CS_ADDER, "cowthink": CT_ADDER, "make_bubble": MB_ADDER}
+•>*** Unknown syntax: key, command = shlex.split(line)[-1] if begin == end else shlex.split(line)[-2], shlex.split(line)[0]
+•>*** Unknown syntax: return [s for s in ADDER[command][key] if s.startswith(text)]
+•>*** Unknown syntax: return [s for s in ADDER[command][key] if s.startswith(text)]
+•>*** Unknown syntax: return [s for s in ADDER[command][key] if s.startswith(text)]
+•>*** Unknown syntax: class CowSaid(cmd.Cmd):
+•>*** Unknown syntax: intro = "Cowsay™ command line (2023)\nCommand line where you can talk with yourself\n"
+•>*** Unknown syntax: prompt = "•>"
+•>*** Unknown syntax: prompt = "•>"
+•>*** Unknown syntax: def do_list_cows(self, arg):
+•>*** Unknown syntax: pth = shlex.split(arg, comments=True)
+•>*** Unknown syntax: pth = pth[0] if pth else cowsay.COW_PEN
+•>*** Unknown syntax: print(cowsay.list_cows(pth))
+•>*** Unknown syntax: print(cowsay.list_cows(pth))
+•>*** Unknown syntax: def do_make_bubble(self, arg):
+•>*** Unknown syntax: *opts, msg = shlex.split(arg, comments=True)
+•>*** Unknown syntax: defaultdict = {'-b':'cowsay', '-d': 40, '-w': True}
+•>*** Unknown syntax: if opts:
+•>*** Unknown syntax: for i in range(0, len(opts), 2):
+•>*** Unknown syntax: defaultdict[opts[i]] = opts[i+1]
+•>*** Unknown syntax: if defaultdict["-w"] in ['false', 'False', 'f', 'F', 'FALSE']:
+•>*** Unknown syntax: defaultdict["-w"] = False
+•>*** Unknown syntax: print(cowsay.make_bubble(msg,
+•>*** Unknown syntax: brackets=cowsay.THOUGHT_OPTIONS[defaultdict["-b"]],
+•>*** Unknown syntax: width=int(defaultdict["-d"]),
+•>*** Unknown syntax: wrap_text=bool(defaultdict["-w"])))
+•>*** Unknown syntax: wrap_text=bool(defaultdict["-w"])))
+•>*** Unknown syntax: def complete_make_bubble(self, text, line, begidx, endidx):
+•>*** Unknown syntax: return complete(text, line, begidx, endidx)
+•>*** Unknown syntax: return complete(text, line, begidx, endidx)
+•>*** Unknown syntax: def do_cowsay(self, arg):
+•>*** Unknown syntax: *opts, msg = shlex.split(arg, comments=True)
+•>*** Unknown syntax: defaultdict = {'-e': cowsay.Option.eyes, '-c': 'default', '-T': cowsay.Option.tongue}
+•>*** Unknown syntax: if opts:
+•>*** Unknown syntax: for i in range(0, len(opts), 2):
+•>*** Unknown syntax: defaultdict[opts[i]] = opts[i+1]
+•>*** Unknown syntax: print(cowsay.cowsay(msg,
+•>*** Unknown syntax: cow=defaultdict['-c'],
+•>*** Unknown syntax: eyes=defaultdict['-e'][:2],
+•>*** Unknown syntax: tongue=defaultdict['-T'][:2]))
+•>*** Unknown syntax: tongue=defaultdict['-T'][:2]))
+•>*** Unknown syntax: def complete_cowsay(self, text, line, begidx, endidx):
+•>*** Unknown syntax: return complete(text, line, begidx, endidx)
+•>*** Unknown syntax: return complete(text, line, begidx, endidx)
+•>*** Unknown syntax: def do_cowthink(self, arg):
+•>*** Unknown syntax: *opts, msg = shlex.split(arg, comments=True)
+•>*** Unknown syntax: defaultdict = {'-e': cowsay.Option.eyes, '-c': 'default', '-T': cowsay.Option.tongue}
+•>*** Unknown syntax: if opts:
+•>*** Unknown syntax: for i in range(0, len(opts), 2):
+•>*** Unknown syntax: defaultdict[opts[i]] = opts[i+1]
+•>*** Unknown syntax: print(cowsay.cowthink(msg,
+•>*** Unknown syntax: cow=defaultdict['-c'],
+•>*** Unknown syntax: eyes=defaultdict['-e'][:2],
+•>*** Unknown syntax: tongue=defaultdict['-T'][:2]))
+•>*** Unknown syntax: tongue=defaultdict['-T'][:2]))
+•>*** Unknown syntax: def complete_cowthink(self, text, line, begidx, endidx):
+•>*** Unknown syntax: return complete(text, line, begidx, endidx)
+•>*** Unknown syntax: return complete(text, line, begidx, endidx)
+•>*** Unknown syntax: def do_exit(self, arg):
+•>*** Unknown syntax: print("Moobye!")
+•>*** Unknown syntax: return 1
+•>*** Unknown syntax: return 1
+•>*** Unknown syntax: return 1
+•>*** Unknown syntax: if __name__ == "__main__":
+•>*** Unknown syntax: CowSaid().cmdloop()
+•>*** Unknown syntax: CowSaid().cmdloop()
+•>*** Unknown syntax: CowSaid().cmdloop()
+•>*** Unknown syntax: CowSaid().cmdloop()
+•>
