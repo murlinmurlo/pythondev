@@ -29,7 +29,8 @@ def gameplay(ask: callable, inform: callable, words: list[str]) -> int:
 
 def inform(format_string: str, bulls: int, cows: int) -> None:
     message = format_string.format(bulls, cows)
-    cowsay.cow(message)
+    print(message)
+    #cowsay.cow(message)
 
 
 def ask(prompt: str, valid: list[str] = None) -> str:
@@ -43,9 +44,9 @@ def ask(prompt: str, valid: list[str] = None) -> str:
     print(cow_hint)
     try_word = input(prompt)
     while valid and try_word not in valid:
+        print('Неизвестное слово')
         try_word = input(prompt)
     return try_word
-
 
 
 parser = argparse.ArgumentParser()
