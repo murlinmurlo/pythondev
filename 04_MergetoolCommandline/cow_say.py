@@ -39,37 +39,36 @@ class CowSaid(cmd.Cmd):
     def complete_make_bubble(self, text, line, begidx, endidx):
         return complete(text, line, begidx, endidx)
 
- 
-   def do_cowsay(self, arg):
-        *opts, msg = shlex.split(arg, comments=True)
-        defaultdict = {'-e': cowsay.Option.eyes, '-c': 'default', '-T': cowsay.Option.tongue}
-        if opts:
-            for i in range(0, len(opts), 2):
-                defaultdict[opts[i]] = opts[i+1]
-        print(cowsay.cowsay(msg,
-                            cow=defaultdict['-c'],
-                            eyes=defaultdict['-e'][:2],
-                            tongue=defaultdict['-T'][:2]))
+    def do_cowsay(self, arg):
+            *opts, msg = shlex.split(arg, comments=True)
+            defaultdict = {'-e': cowsay.Option.eyes, '-c': 'default', '-T': cowsay.Option.tongue}
+            if opts:
+                for i in range(0, len(opts), 2):
+                    defaultdict[opts[i]] = opts[i+1]
+            print(cowsay.cowsay(msg,
+                                cow=defaultdict['-c'],
+                                eyes=defaultdict['-e'][:2],
+                                tongue=defaultdict['-T'][:2]))
 
     def complete_cowsay(self, text, line, begidx, endidx):
-        return complete(text, line, begidx, endidx)
+            return complete(text, line, begidx, endidx)
 
     def do_cowthink(self, arg):
-        *opts, msg = shlex.split(arg, comments=True)
-        defaultdict = {'-e': cowsay.Option.eyes, '-c': 'default', '-T': cowsay.Option.tongue}
-        if opts:
-            for i in range(0, len(opts), 2):
-                defaultdict[opts[i]] = opts[i+1]
-        print(cowsay.cowthink(msg,
-                            cow=defaultdict['-c'],
-                            eyes=defaultdict['-e'][:2],
-                            tongue=defaultdict['-T'][:2]))
+                *opts, msg = shlex.split(arg, comments=True)
+                defaultdict = {'-e': cowsay.Option.eyes, '-c': 'default', '-T': cowsay.Option.tongue}
+                if opts:
+                    for i in range(0, len(opts), 2):
+                        defaultdict[opts[i]] = opts[i+1]
+                print(cowsay.cowthink(msg,
+                                    cow=defaultdict['-c'],
+                                    eyes=defaultdict['-e'][:2],
+                                    tongue=defaultdict['-T'][:2]))
 
     def complete_cowthink(self, text, line, begidx, endidx):
-        return complete(text, line, begidx, endidx)
+            return complete(text, line, begidx, endidx)
 
     def do_exit(self, arg):
-        return 
+            return 
 
 if __name__ == "__main__":
-    CowSaid().cmdloop()
+        CowSaid().cmdloop()
