@@ -1,26 +1,41 @@
 #!/usr/bin/env python3
 import asyncio
+import cowsay
+import shlex
 
 clients = {}
 
 async def chat(reader, writer):
-    me = "{}:{}".format(*writer.get_extra_info('peername'))
-    print(me)
-    clients[me] = asyncio.Queue()
+    me = None
+    r = asyncio.Queue()
+    flag = False
+
+    while me not in cowsay.list_cows():
+        inpt = (await reader.readline()).decode().strip()
+        if inpt == 'who':
+            writer.write((cowsay.cowsay(' '.join([i for i in clients])) + '\n').encode())
+            await writer.drain()
+        elif inpt == 'cows':
+            writer.write((cowsay.cowsay(' '.join(set(cowsay.list_cows()) - set([i for i in clients]))) + '\n').encode())
+            await writer.drain()
+        elif inpt == 'quit':
+            flag = True
+            break
+        elif len(inpt.split()) != 2:
+            continue
+        else:
+            login, me = inpt.split()
+            if login != 'login':
+                me = None
+    clients[me] = r
     send = asyncio.create_task(reader.readline())
     receive = asyncio.create_task(clients[me].get())
-    while not reader.at_eof():
+    while not reader.at_eof() and not f:
         done, pending = await asyncio.wait([send, receive], return_when=asyncio.FIRST_COMPLETED)
         for q in done:
             if q is send:
                 send = asyncio.create_task(reader.readline())
-                for out in clients.values():
-                    if out is not clients[me]:
-                        await out.put(f"{me} {q.result().decode().strip()}")
-            elif q is receive:
-                receive = asyncio.create_task(clients[me].get())
-                writer.write(f"{q.result()}\n".encode())
-                await writer.drain()
+
     send.cancel()
     receive.cancel()
     print(me, "DONE")
