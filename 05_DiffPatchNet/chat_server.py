@@ -9,7 +9,7 @@ async def chat(reader, writer):
     me = None
     r = asyncio.Queue()
     flag = False
-
+    
     while me not in cowsay.list_cows():
         inpt = (await reader.readline()).decode().strip()
         if inpt == 'who':
@@ -35,7 +35,25 @@ async def chat(reader, writer):
         for q in done:
             if q is send:
                 send = asyncio.create_task(reader.readline())
-
+                command = shlex.split(q.result().decode())
+                if command[0] == 'who':
+                    await clients[me].put(cowsay.cowsay(' '.join([i for i in clients])))
+                elif command[0] == 'cows':
+                    await clients[me].put(cowsay.cowsay(' '.join(set(cowsay.list_cows()) - set([i for i in clients]))))
+                elif command[0] == 'say':
+                    nm, *txt = command[1:]
+                    await clients[nm].put(cowsay.cowsay(' '.join(txt), cow=me))
+                elif command[0] == 'yield':
+                    txt = command[1:]
+                    for i in clients.values():
+                        if i is not clients[me]:
+                            await i.put(cowsay.cowsay(' '.join(txt), cow=me))
+                elif command[0] == 'quit':
+                    flag = True
+            else:
+                receive = asyncio.create_task(clients[me].get())
+                writer.write(f"{q.result()}\n".encode())
+                await writer.drain()
     send.cancel()
     receive.cancel()
     print(me, "DONE")
