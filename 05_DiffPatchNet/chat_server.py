@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import asyncio
 import cowsay
-import shlex
+
 
 clients = {}
 
@@ -30,12 +30,12 @@ async def chat(reader, writer):
     clients[me] = r
     send = asyncio.create_task(reader.readline())
     receive = asyncio.create_task(clients[me].get())
-    while not reader.at_eof() and not f:
+    while not reader.at_eof() and not flag:
         done, pending = await asyncio.wait([send, receive], return_when=asyncio.FIRST_COMPLETED)
         for q in done:
             if q is send:
                 send = asyncio.create_task(reader.readline())
-                command = shlex.split(q.result().decode())
+                command = q.result().decode().split()
                 if command[0] == 'who':
                     await clients[me].put(cowsay.cowsay(' '.join([i for i in clients])))
                 elif command[0] == 'cows':
