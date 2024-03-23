@@ -20,6 +20,16 @@ def complete_login(text, state):
     except IndexError:
         return None
 
+def complete_say(text, state):
+    if not text:
+        completions = send_command('who').split()
+    else:
+        completions = [user for user in send_command('who').split() if user.startswith(text)]
+    try:
+        return completions[state]
+    except IndexError:
+        return None
+
 
 
 readline.parse_and_bind("tab: complete")
